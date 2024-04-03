@@ -1,0 +1,120 @@
+Basic closure example:
+python
+Copy code
+def outer_function(x):
+    def inner_function():
+        return x
+    return inner_function
+
+closure = outer_function(5)
+print(closure())  # Output: 5
+Closure with modification of outer scope variable:
+python
+Copy code
+def outer_function():
+    x = 10
+    def inner_function():
+        nonlocal x
+        x += 1
+        return x
+    return inner_function
+
+closure = outer_function()
+print(closure())  # Output: 11
+print(closure())  # Output: 12
+Closure capturing multiple variables:
+python
+Copy code
+def outer_function(x, y):
+    def inner_function():
+        return x + y
+    return inner_function
+
+closure = outer_function(3, 7)
+print(closure())  # Output: 10
+Using a closure in a loop:
+python
+Copy code
+def outer_function():
+    closures = []
+    for i in range(3):
+        def inner_function():
+            return i
+        closures.append(inner_function)
+    return closures
+
+closures = outer_function()
+for closure in closures:
+    print(closure())  # Output: 2 2 2
+Closure with mutable objects:
+python
+Copy code
+def outer_function():
+    count = [0]
+    def inner_function():
+        count[0] += 1
+        return count[0]
+    return inner_function
+
+closure = outer_function()
+print(closure())  # Output: 1
+print(closure())  # Output: 2
+Closure with default arguments:
+python
+Copy code
+def outer_function(x=5):
+    def inner_function():
+        return x
+    return inner_function
+
+closure = outer_function()
+print(closure())  # Output: 5
+Closure modifying a mutable object from outer scope:
+python
+Copy code
+def outer_function():
+    data = {'count': 0}
+    def inner_function():
+        data['count'] += 1
+        return data['count']
+    return inner_function
+
+closure = outer_function()
+print(closure())  # Output: 1
+print(closure())  # Output: 2
+Closure with conditional logic:
+python
+Copy code
+def outer_function(x):
+    def inner_function():
+        if x < 10:
+            return "Less than 10"
+        else:
+            return "Greater than or equal to 10"
+    return inner_function
+
+closure1 = outer_function(5)
+closure2 = outer_function(15)
+print(closure1())  # Output: Less than 10
+print(closure2())  # Output: Greater than or equal to 10
+Closure returning another function:
+python
+Copy code
+def outer_function():
+    def inner_function():
+        return "Inner function"
+    return inner_function
+
+def outer_function_caller():
+    closure = outer_function()
+    return closure()
+
+print(outer_function_caller())  # Output: Inner function
+Closure with lambda function:
+python
+Copy code
+def outer_function(x):
+    return lambda y: x + y
+
+closure = outer_function(5)
+print(closure(3))  # Output: 8
